@@ -1,6 +1,11 @@
 import express, { Router, Request, Response } from 'express';
+import jwt from 'jsonwebtoken';
+import SECRET_KEY from '../configs/secretkey';
 import prisma from '../prisma';
+
+
 const router: Router = express.Router();
+
 
 // Rota de login
 router.post('/login', async (req: Request, res: Response) => {
@@ -12,16 +17,18 @@ router.post('/login', async (req: Request, res: Response) => {
 	);
 
 	try {
-        const user = await prisma.user.create({
-			data: {
-			  email: email,
-			  name: username,
-			  password: password
-			},
-		  })
-        res.status(201).json(JSON.stringify(user));
+      const user = await prisma.user.create({
+        data: {
+          email: email,
+          name: username,
+          password: password
+        },
+      })
+      const token = jwt.sign({ user }, SECRET_KEY, { expiresIn: '1h' });
+      res.status(201).json({ token });
     } catch (error) {
-        res.status(500).json({ error: 'An error occurred while creating the user' });
+      res.status(401).json({ message: 'Credenciais inválidas' });
+      console.log(error);
     }
 });
 

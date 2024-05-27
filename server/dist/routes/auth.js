@@ -13,6 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const secretkey_1 = __importDefault(require("../configs/secretkey"));
 const prisma_1 = __importDefault(require("../prisma"));
 const router = express_1.default.Router();
 // Rota de login
@@ -27,10 +29,12 @@ router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* 
                 password: password
             },
         });
-        res.status(201).json(JSON.stringify(user));
+        const token = jsonwebtoken_1.default.sign({ user }, secretkey_1.default, { expiresIn: '1h' });
+        res.status(201).json({ token });
     }
     catch (error) {
-        res.status(500).json({ error: 'An error occurred while creating the user' });
+        res.status(401).json({ message: 'Credenciais inválidas' });
+        console.log(error);
     }
 }));
 // Rota de logout

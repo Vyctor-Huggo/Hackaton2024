@@ -4,29 +4,40 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const secretkey_1 = __importDefault(require("./configs/secretkey"));
+//middlewares
+const authenticateToken_1 = __importDefault(require("./middlewares/authenticateToken"));
 const express_session_1 = __importDefault(require("express-session"));
-const crypto_1 = __importDefault(require("crypto"));
 const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
+//importando rotas
 const auth_1 = __importDefault(require("./routes/auth"));
+const coisa_1 = __importDefault(require("./routes/coisa"));
 const app = (0, express_1.default)();
+app.use(body_parser_1.default.json());
+app.use(body_parser_1.default.urlencoded({ extended: false }));
 app.use((0, cors_1.default)({
     origin: 'http://localhost:3000',
     credentials: true
 }));
-app.use(body_parser_1.default.json());
-// Configuração do express-session
-const secretKey = crypto_1.default.randomBytes(32).toString('hex');
 app.use((0, express_session_1.default)({
-    secret: secretKey,
+    secret: secretkey_1.default,
     resave: false,
     saveUninitialized: true
 }));
 // Rotas de autenticação
 app.use('/auth', auth_1.default);
-// Rota principal
-app.get('/', (req, res, next) => {
-    res.send('Bem-vindo ao meu aplicativo Express com sessões!');
+app.use('/coisa', authenticateToken_1.default, coisa_1.default);
+// Rota Not Found
+app.use((req, res, next) => {
+    res.status(404).json({ message: 'Not Found' });
+});
+//Rota de Erro
+app.use((err, req, res, next) => {
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.status(err.status || 500);
+    res.json({ message: err.message });
 });
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
