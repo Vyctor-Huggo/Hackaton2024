@@ -9,7 +9,7 @@ import cors from 'cors';
 
 //importando rotas
 import authRouter from './routes/auth';
-import coisaRouter from './routes/coisa';
+import coisaRouter from './routes/dashboard';
 
 const app = express();
 
@@ -29,7 +29,7 @@ app.use(session({
 
 // Rotas de autenticação
 app.use('/auth', authRouter);
-app.use('/coisa', authenticateToken, coisaRouter);
+app.use('/api', authenticateToken, coisaRouter);
 
 
 // Rota Not Found

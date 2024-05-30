@@ -12,7 +12,7 @@ const body_parser_1 = __importDefault(require("body-parser"));
 const cors_1 = __importDefault(require("cors"));
 //importando rotas
 const auth_1 = __importDefault(require("./routes/auth"));
-const coisa_1 = __importDefault(require("./routes/coisa"));
+const dashboard_1 = __importDefault(require("./routes/dashboard"));
 const app = (0, express_1.default)();
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: false }));
@@ -27,7 +27,7 @@ app.use((0, express_session_1.default)({
 }));
 // Rotas de autenticação
 app.use('/auth', auth_1.default);
-app.use('/coisa', authenticateToken_1.default, coisa_1.default);
+app.use('/api', authenticateToken_1.default, dashboard_1.default);
 // Rota Not Found
 app.use((req, res, next) => {
     res.status(404).json({ message: 'Not Found' });

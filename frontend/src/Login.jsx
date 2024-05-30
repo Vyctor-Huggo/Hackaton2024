@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function App() {
+function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [message, setMessage] = useState('');
   const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -18,9 +20,11 @@ function App() {
       });
       if (response.ok) {
         const data = await response.json();
+        localStorage.setItem('token', data.token);
         setMessage(`Login successful: ${data.token}`);
+        navigate('/dashboard');
       } else {
-        setMessage('Login failed not ok');
+          console.error('Erro ao fazer login');
       }
     } catch (error) {
       setMessage(`Error: ${error.message}`);
@@ -62,4 +66,4 @@ function App() {
   );
 }
 
-export default App;
+export default Login;
