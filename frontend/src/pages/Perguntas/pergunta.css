@@ -1,0 +1,88 @@
+body{
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0%;
+}
+.container{
+    align-items: center;
+    justify-content: flex-start;
+    width: 300vh;
+    height: 60vw;
+    
+}
+#row01{
+    align-items: start;
+    display: flex;
+    justify-content: flex-start;
+    height: 90vh;
+    width: 200vh;
+}
+#barraNavegacao{
+    align-items: center;
+    justify-content: center;
+    box-shadow: 10px 5px 5px 0px rgba(137, 136, 136, 0.3);
+    border-radius: 3vh;
+    width: 30vh;
+    height: 75vh;
+    margin-top: 1%;
+    margin-left: 3%;
+}
+#logo{
+    width: 25vh;
+    height: 15vh;
+}
+.homeIcon{
+    width: 5vh;
+    height: 5vh;
+}
+#principal{
+    align-items: start;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    width: 120vh;
+    margin-top: 1%;
+    margin-left: 1.5%;
+
+}
+a {
+    text-decoration: none;
+}
+#titulo{
+    align-items: start;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+
+}
+#duvidas{
+    width: 10vh;
+    height: 10vh;
+}
+#txtDuvidas{
+    margin-top: 14%;
+}
+.duvida{
+    align-items: start;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: column;
+    margin-top: 3%;
+    box-shadow: 0px 0px 15px 5px rgba(0, 0, 0, 0.2);
+    background-color: rgba(217, 217, 217, 1);
+    border-radius: 3vh;
+    padding-left: 0.6%;
+}
+.imgNome{
+    align-items: start;
+    justify-content: flex-start;
+    display: flex;
+    flex-direction: row;
+    margin-left: 0.5%;
+}
+.imgPerfil{
+    width: 6.5vh;
+    height:6.5vh;
+    border-radius: 5vh;
+}

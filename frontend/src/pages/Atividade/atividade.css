@@ -1,0 +1,76 @@
+/* Estilos gerais */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Estilos da seção de atividades */
+.atividades-section {
+  width: 100%;
+  max-width: 800px;
+  margin-bottom: 20px;
+}
+
+.atividades-section h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.atividade-card {
+  background-color: #3C5E8B;
+  color: #FFF;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.atividade-image {
+  width: 50px;
+  height: 50px;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.atividade-info h3 {
+  margin: 0 0 10px;
+}
+
+.atividade-info p {
+  margin: 0;
+  color: #A4DDDB;
+}
+
+/* Estilos da seção de informações */
+.info-section {
+  width: 100%;
+  max-width: 800px;
+}
+
+.info-card {
+  background-color: #3C5E8B;
+  color: #FFF;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.dias-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.dia {
+  background-color: #4F8FBA;
+  color: #B2EBE9;
+  padding: 10px;
+  border-radius: 5px;
+  flex: 1;
+  text-align: center;
+  margin: 0 5px;
+}

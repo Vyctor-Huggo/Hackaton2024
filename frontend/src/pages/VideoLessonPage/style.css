@@ -1,0 +1,36 @@
+/* styles.css */
+.video-lesson-page {
+    text-align: center;
+  }
+  
+  .video-lesson {
+    margin-top: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .lesson-title h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .visual-reinforcement {
+    margin-top: 40px;
+  }
+  
+  .visual-reinforcement h2 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .image-grid {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .image-grid img {
+    max-width: 150px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+  }
+  
