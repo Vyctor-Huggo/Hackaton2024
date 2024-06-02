@@ -1,11 +1,37 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../../components/Header';
 import Rodape from '../../components/Rodape';
 import googleIcon from '../../imagens/googleIcon.png';
 import logo from '../../imagens/logo.jpg';
 
 const Login = () => {
+  	const [email, setEmail] = useState('');
+  	const [password, setPassword] = useState('');
+  	const navigate = useNavigate();
+
+  	const handleSubmit = async (e) => {
+      e.preventDefault();
+
+      const response = await fetch('http://localhost:5000/auth/login', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+          const data = await response.json();
+          localStorage.setItem('token', data.token);
+          navigate('/desenvolvedores');
+      } else {
+          console.error('Erro ao fazer login');
+      }
+  	};
+
+
   return (
     <>
       <Header />
@@ -19,15 +45,40 @@ const Login = () => {
                 <p style={styles.googleText}>Entrar com o Google</p>
               </div>
             </a>
-            <div className="input-group mb-3" style={styles.inputGroup}>
-              <span className="input-group-text" id="basic-addon1"></span>
-              <input type="text" className="form-control" placeholder="Email" aria-label="Username" aria-describedby="basic-addon1" />
-            </div>
-            <div className="input-group mb-3" style={styles.inputGroup}>
-              <span className="input-group-text" id="basic-addon1"></span>
-              <input type="text" className="form-control" placeholder="Senha" aria-label="Username" aria-describedby="basic-addon1" />
-            </div>
-            <button type="button" className="btn btn-success btn-lg" style={styles.logarBtn}>Logar</button>
+
+			{/* Forms de login */}
+			<form onSubmit={handleSubmit}>
+				<div className="input-group mb-3" style={styles.inputGroup}>
+					<span className="input-group-text" id="basic-addon1"></span>
+					<input 
+						type="text" 
+						className="form-control" 
+						placeholder="Email" 
+						name="email" 
+						aria-label="Username" 
+						aria-describedby="basic-addon1" 
+						value={email}
+						onChange={(e) => setEmail(e.target.value)}
+					/>
+				</div>
+
+				<div className="input-group mb-3" style={styles.inputGroup}>
+					<span className="input-group-text" id="basic-addon1"></span>
+					<input 
+							type="text" 
+							className="form-control" 
+							placeholder="Senha" 
+							name="password" 
+							aria-label="Username" 
+							aria-describedby="basic-addon1"
+							value={password}
+							onChange={(e) => setPassword(e.target.value)} 
+						/>
+				</div>
+
+				<button type="submit" className="btn btn-success btn-lg" style={styles.logarBtn}>Logar</button>
+			</form>
+            
             <div id="textoFinal">
               <a href="#" style={styles.txtEnd}>
                 <p style={styles.txtEndText}>Não tem uma conta? Crie uma grátis</p>

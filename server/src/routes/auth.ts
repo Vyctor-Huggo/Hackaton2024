@@ -9,22 +9,16 @@ const router: Router = express.Router();
 
 // Rota de login
 router.post('/login', async (req: Request, res: Response) => {
-  	const { username, email, password } = req.body;
+  	const {email, password } = req.body;
   	console.log(
-		'Received auth request with username: ', username, 
-		" with pass: ", password, 
-		" with email: ", email
+		"pass: ", password, 
+		"email: ", email
 	);
 
 	try {
-      const user = await prisma.user.create({
-        data: {
-          email: email,
-          name: username,
-          password: password
-        },
-      })
+      const user = await prisma.user.findUnique({ where: { email: email } })
       const token = jwt.sign({ user }, SECRET_KEY, { expiresIn: '1h' });
+      console.log("Oia o token: ", token);
       res.status(201).json({ token });
     } catch (error) {
       res.status(401).json({ message: 'Credenciais inválidas' });

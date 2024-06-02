@@ -19,17 +19,12 @@ const prisma_1 = __importDefault(require("../prisma"));
 const router = express_1.default.Router();
 // Rota de login
 router.post('/login', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { username, email, password } = req.body;
-    console.log('Received auth request with username: ', username, " with pass: ", password, " with email: ", email);
+    const { email, password } = req.body;
+    console.log("pass: ", password, "email: ", email);
     try {
-        const user = yield prisma_1.default.user.create({
-            data: {
-                email: email,
-                name: username,
-                password: password
-            },
-        });
+        const user = yield prisma_1.default.user.findUnique({ where: { email: email } });
         const token = jsonwebtoken_1.default.sign({ user }, secretkey_1.default, { expiresIn: '1h' });
+        console.log("Oia o token: ", token);
         res.status(201).json({ token });
     }
     catch (error) {

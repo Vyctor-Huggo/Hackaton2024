@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
 import DesenvolvedoresPage from "./pages/Desenvolvedores/Desenvolvedores";
 import HomePage from "./pages/Home/Home";
 import MateriasPage from "./pages/Materias/Materias";
@@ -14,14 +14,17 @@ import HistoriaPage from "./pages/Materias/Historia";
 import PortuguesPage from "./pages/Materias/Portugues";
 import VideoLessonPage from "./pages/VideoLessonPage/VisualLessonPage";
 
-
+const Private = ({Item}) => {
+  const isAuthenticated = localStorage.getItem('token') ? true : false;
+  return isAuthenticated > 0 ? <Item /> : <Navigate to="/login" />;
+}
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/' element={<HomePage/>} />
-        <Route path="/desenvolvedores" element={<DesenvolvedoresPage/>}/>
+        <Route path="/desenvolvedores" element={<Private Item={DesenvolvedoresPage}/>}/>
         <Route path="/materias" element={<MateriasPage/>}/>
         <Route path="/perfil" element={<PerfilAluno/>}/>
         <Route path="/login" element={<Login/>}/>
