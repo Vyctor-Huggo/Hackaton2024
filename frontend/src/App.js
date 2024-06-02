@@ -14,9 +14,9 @@ import HistoriaPage from "./pages/Materias/Historia";
 import PortuguesPage from "./pages/Materias/Portugues";
 import VideoLessonPage from "./pages/VideoLessonPage/VisualLessonPage";
 
+
+
 function App() {
-
-
   return (
     <BrowserRouter>
       <Routes>
